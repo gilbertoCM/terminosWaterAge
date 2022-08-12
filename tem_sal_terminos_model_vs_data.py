@@ -12,7 +12,6 @@ import seaborn as sns
 import matplotlib.pyplot as plt
 import gsw as gsw
 import matplotlib.dates as mdates
-from dateutil.relativedelta import relativedelta
 
 # %% 
 
@@ -26,69 +25,69 @@ def makePretryGraphs():
 
 # %% read my data base
 
-sal_temp_terminos_semar= "TerminosSalTempSEMAR_duplicatedRemoved.csv"
+sal_temp_terminos_semar_model= "salinity_terminos_marina_delft3d.csv"
 
-terminos_sal_temp_SEMAR = pd.read_csv(sal_temp_terminos_semar, sep=",", header=0, 
+terminos_sal_temp_rawdata = pd.read_csv(sal_temp_terminos_semar_model, sep=",", header=0, 
                                       decimal=".", encoding = 'utf-8')
 
-sal_terminos_delft3d= "salinity_terminos_marina_delft3d.csv"
+for col in terminos_sal_temp_rawdata.columns:
+    print(col)
 
-terminos_sal_delft3d= pd.read_csv(sal_terminos_delft3d, sep=",", header=0, 
-                                      decimal=".", encoding = 'utf-8')
 
+terminos_sal_temp = terminos_sal_temp_rawdata[["Time_model", 
+                                               "salinity_psu_model",
+                                               "temperature_C_model",
+                                               "Conductivity_microsiemens_cm_average",
+                                               "Temp_C_average"
+                                             ]]
+            
 
 # %% Set date time 
 
-terminos_sal_temp_SEMAR["Date_GMT_00"] =  pd.to_datetime(terminos_sal_temp_SEMAR["Date_GMT_00"], 
+terminos_sal_temp["Time_model"] =  pd.to_datetime(terminos_sal_temp["Time_model"], 
                                                         format= '%d/%m/%Y %H:%M')
 
-terminos_sal_temp_SEMAR = terminos_sal_temp_SEMAR.set_index(terminos_sal_temp_SEMAR["Date_GMT_00"])
+terminos_sal_temp = terminos_sal_temp.set_index(terminos_sal_temp["Time_model"])
 
 
-terminos_sal_delft3d["Time_2017"] =  pd.to_datetime(terminos_sal_delft3d["Time_2017"], 
-                                                        format= '%d/%m/%Y %H:%M')
-
-
-terminos_sal_delft3d = terminos_sal_delft3d.set_index(terminos_sal_delft3d["Time_2017"])
+terminos_sal_temp = terminos_sal_temp.set_index(terminos_sal_temp["Time_model"])
 
 
 months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 
           'August', 'September', 'October', 'November', 'December']
 
 
-
-
 # %% Calculate salinity from hobo conductivity 
 
-
-terminos_sal_temp_SEMAR["FalsePreasure"] = 0
+terminos_sal_temp["falsePreasure"] = 0
                                   
-terminos_sal_temp_SEMAR["Salinity_psu"] = gsw.conversions.SP_from_C(terminos_sal_temp_SEMAR["Conductivity_microsiemens_cm"]/1000, 
-                                                                    terminos_sal_temp_SEMAR["Temp_C"], 
-                                                                    terminos_sal_temp_SEMAR["FalsePreasure"])
-
-
-
-# %% 
-start_date = "2017-01-01 01:00:00"
-
-end_date = "2017-08-04 00:00:00"
-
-mask = (terminos_sal_temp_SEMAR["Date_GMT_00"] > start_date) & (terminos_sal_temp_SEMAR["Date_GMT_00"] <= end_date)
-
-terminos_sal_temp_SEMAR_2017 = terminos_sal_temp_SEMAR.loc[mask]
- 
-
-mask = (terminos_sal_delft3d["Time_2017"] > start_date) & (terminos_sal_delft3d["Time_2017"] <= end_date)
-   
-terminos_sal_delft3d = terminos_sal_delft3d.loc[mask]
+terminos_sal_temp["salinity_psu"] = gsw.conversions.SP_from_C(terminos_sal_temp["Conductivity_microsiemens_cm_average"]/1000, 
+                                                                    terminos_sal_temp["Temp_C_average"], 
+                                                                    terminos_sal_temp["FalsePreasure"])
 
 
 # %% 
 
-sns.relplot( x = 'Date_GMT_00',
+plt.plot_date(terminos_sal_temp["Time_model"], terminos_sal_temp["temperature_C_model"])
+
+plt.plot_date(terminos_sal_temp["Time_model"], terminos_sal_temp["Temp_C_average"])
+
+
+
+# %% 
+
+plt.plot_date(terminos_sal_temp["Time_model"], terminos_sal_temp["temperature_C_model"])
+
+plt.plot_date(terminos_sal_temp["Time_model"], terminos_sal_temp["Temp_C_average"])
+
+
+
+# %% 
+
+
+sns.relplot( x = 'Time_model',
              y = 'Salinity_psu',
-             data = terminos_sal_temp_SEMAR_2017,
+             data = terminos_sal_temp,
              color = "#5ec962", 
              dashes=False, 
              height=10, aspect=1.5)
@@ -106,10 +105,9 @@ plt.show()
 
 # %% 
 
-
-sns.relplot( x = 'Time_2017',
-             y = 'salinity_psu',
-             data = terminos_sal_delft3d,
+sns.relplot( x = 'Time_model',
+             y = 'salinity_psu_model',
+             data = terminos_sal_temp,
              color = "#5ec962", 
              dashes=False, 
              height=10, aspect=1.5)
@@ -117,13 +115,15 @@ sns.relplot( x = 'Time_2017',
 
 plt.gca().xaxis.set_major_formatter(mdates.DateFormatter('%Y-%m'))
 
-plt.ylabel("salinity (psu)",fontsize=20)
+plt.ylabel("Salinity (psu)",fontsize=20)
 plt.xlabel("Date",fontsize=25)
 
 makePretryGraphs()
 
 plt.show()
 
+
+            
 
 # %% 
 
@@ -196,7 +196,7 @@ def runMyStat(predictions, targets):
     print (rmse(predictions, targets))
     print (mae(predictions, targets))
     print (ame(predictions, targets))    
-    #print (modelSkill(predictions, targets))
+    print (modelSkill(predictions, targets))
     print (willmottAgreement(predictions, targets))
     
 
@@ -205,5 +205,6 @@ def runMyStat(predictions, targets):
 
 # %% 
 
-runMyStat(terminos_sal_delft3d['salinity_psu'],terminos_sal_temp_SEMAR_2017['Salinity_psu'] )
+runMyStat(terminos_sal_temp['Salinity_psu'],terminos_sal_temp['salinity_psu_model'] )
 
+runMyStat(terminos_sal_temp['temperature_C_model'],terminos_sal_temp['Temp_C_average'] )
