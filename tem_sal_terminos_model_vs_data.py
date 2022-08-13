@@ -63,23 +63,39 @@ terminos_sal_temp["falsePreasure"] = 0
                                   
 terminos_sal_temp["salinity_psu"] = gsw.conversions.SP_from_C(terminos_sal_temp["Conductivity_microsiemens_cm_average"]/1000, 
                                                                     terminos_sal_temp["Temp_C_average"], 
-                                                                    terminos_sal_temp["FalsePreasure"])
+                                                                    terminos_sal_temp["falsePreasure"])
 
 
 # %% 
 
-plt.plot_date(terminos_sal_temp["Time_model"], terminos_sal_temp["temperature_C_model"])
+plt.figure(figsize=(20,12))
 
-plt.plot_date(terminos_sal_temp["Time_model"], terminos_sal_temp["Temp_C_average"])
+plt.plot_date(terminos_sal_temp["Time_model"], 
+              terminos_sal_temp["Temp_C_average"], 
+              '*', color= "#440154"
+              )
+
+plt.xlim(min(terminos_sal_temp["Time_model"]), max(terminos_sal_temp["Time_model"]))
+
+plt.xticks(size=24)
+
+plt.yticks(size=24)
+
+plt.ylabel('Temperature (ºC)', size =30)
+
+plt.gca().xaxis.set_major_formatter(mdates.DateFormatter('%b'))
+
+plt.rc("pdf", fonttype=42)
 
 
+plt.xlim(min(terminos_sal_temp["Time_model"]), max(terminos_sal_temp["Time_model"]))
 
-# %% 
 
-plt.plot_date(terminos_sal_temp["Time_model"], terminos_sal_temp["temperature_C_model"])
+plt.plot_date(terminos_sal_temp["Time_model"], 
+              terminos_sal_temp["temperature_C_model"],
+              '.', color= "#5ec962")
 
-plt.plot_date(terminos_sal_temp["Time_model"], terminos_sal_temp["Temp_C_average"])
-
+plt.savefig("temperatureModelDataSMAR.pdf")
 
 
 # %% 
@@ -105,6 +121,7 @@ plt.show()
 
 # %% 
 
+
 sns.relplot( x = 'Time_model',
              y = 'salinity_psu_model',
              data = terminos_sal_temp,
@@ -117,6 +134,8 @@ plt.gca().xaxis.set_major_formatter(mdates.DateFormatter('%Y-%m'))
 
 plt.ylabel("Salinity (psu)",fontsize=20)
 plt.xlabel("Date",fontsize=25)
+
+
 
 makePretryGraphs()
 
@@ -205,6 +224,6 @@ def runMyStat(predictions, targets):
 
 # %% 
 
-runMyStat(terminos_sal_temp['Salinity_psu'],terminos_sal_temp['salinity_psu_model'] )
+runMyStat(terminos_sal_temp['salinity_psu'],terminos_sal_temp['salinity_psu_model'] )
 
 runMyStat(terminos_sal_temp['temperature_C_model'],terminos_sal_temp['Temp_C_average'] )
