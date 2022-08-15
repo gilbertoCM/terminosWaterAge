@@ -77,11 +77,11 @@ plt.plot_date(terminos_sal_temp["Time_model"],
 
 plt.xlim(min(terminos_sal_temp["Time_model"]), max(terminos_sal_temp["Time_model"]))
 
-plt.xticks(size=24)
+plt.xticks(size=28)
 
-plt.yticks(size=24)
+plt.yticks(size=28)
 
-plt.ylabel('Temperature (ºC)', size =30)
+plt.ylabel('Temperature (\u00b0C)', size =34)
 
 plt.gca().xaxis.set_major_formatter(mdates.DateFormatter('%b'))
 
@@ -101,52 +101,40 @@ plt.savefig("temperatureModelDataSMAR.pdf")
 # %% 
 
 
-sns.relplot( x = 'Time_model',
-             y = 'Salinity_psu',
-             data = terminos_sal_temp,
-             color = "#5ec962", 
-             dashes=False, 
-             height=10, aspect=1.5)
-  
+plt.figure(figsize=(20,12))
 
-plt.gca().xaxis.set_major_formatter(mdates.DateFormatter('%Y-%m'))
+plt.plot_date(terminos_sal_temp["Time_model"], 
+              terminos_sal_temp["salinity_psu"], 
+              '*', color= "#440154"
+              )
 
-plt.ylabel("Salinity (psu)",fontsize=20)
-plt.xlabel("Date",fontsize=25)
+plt.xlim(min(terminos_sal_temp["Time_model"]), max(terminos_sal_temp["Time_model"]))
 
-makePretryGraphs()
+plt.xticks(size=28)
 
-plt.show()
+plt.yticks(size=28)
 
+plt.ylabel('Salinity (psu)', size =34)
 
-# %% 
+plt.gca().xaxis.set_major_formatter(mdates.DateFormatter('%b'))
 
-
-sns.relplot( x = 'Time_model',
-             y = 'salinity_psu_model',
-             data = terminos_sal_temp,
-             color = "#5ec962", 
-             dashes=False, 
-             height=10, aspect=1.5)
-  
-
-plt.gca().xaxis.set_major_formatter(mdates.DateFormatter('%Y-%m'))
-
-plt.ylabel("Salinity (psu)",fontsize=20)
-plt.xlabel("Date",fontsize=25)
+plt.rc("pdf", fonttype=42)
 
 
-
-makePretryGraphs()
-
-plt.show()
+plt.xlim(min(terminos_sal_temp["Time_model"]), max(terminos_sal_temp["Time_model"]))
 
 
-            
+plt.plot_date(terminos_sal_temp["Time_model"], 
+              terminos_sal_temp["salinity_psu_model"],
+              '.', color= "#5ec962")
+
+plt.savefig("salinityModelDataSMAR.pdf")
+
+
+           
 
 # %% 
-
-  
+ 
 
 def bias(predictions, targets):
         difference = (predictions - targets)
