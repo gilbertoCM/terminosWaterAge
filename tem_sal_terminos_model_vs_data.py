@@ -26,7 +26,7 @@ def makePretryGraphs():
 
 # %% read my data base
 
-sal_temp_terminos_semar_model = "salinity_terminos_marina_delft3d.csv"
+sal_temp_terminos_semar_model = "old_salinity_terminos_marina_delft3d.csv"
 
 terminos_sal_temp_rawdata = pd.read_csv(
     sal_temp_terminos_semar_model, sep=",", header=0, decimal=".", encoding="utf-8"
@@ -197,14 +197,14 @@ def ame(predictions, targets):  # Absolute Maximun Error (AME)
     return ame_val
 
 
-def modelSkill(model, observations):
-    differences = model - observations
+def modelSkill(predictions, targets):
+    differences = predictions - targets
     differencesSquared = abs(differences) ** 2
     sumDifferencesSquared = sum(differencesSquared)
-    meanObservations = np.mean(observations)
-    modelMinusMeanObservations = np.absolute(list(np.asarray(model) - meanObservations))
+    meanObservations = np.mean(targets)
+    modelMinusMeanObservations = np.absolute(list(np.asarray(predictions) - meanObservations))
     observationsMinusMeanObservations = np.absolute(
-        list(np.asarray(observations) - meanObservations)
+        list(np.asarray(targets) - meanObservations)
     )
     denominator = sum(
         np.square(modelMinusMeanObservations + observationsMinusMeanObservations)
@@ -248,6 +248,9 @@ def runMyStat(predictions, targets):
 
 # %%
 
-runMyStat(terminos_sal_temp["salinity_psu"], terminos_sal_temp["salinity_psu_model"])
+
+runMyStat(terminos_sal_temp["salinity_psu_model"], terminos_sal_temp["salinity_psu"])
 
 runMyStat(terminos_sal_temp["temperature_C_model"], terminos_sal_temp["Temp_C_average"])
+
+
