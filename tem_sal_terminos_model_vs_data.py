@@ -26,7 +26,7 @@ def makePretryGraphs():
 
 # %% read my data base
 
-sal_temp_terminos_semar_model = "old_salinity_terminos_marina_delft3d.csv"
+sal_temp_terminos_semar_model = "salinity_terminos_marina_delft3d.csv"
 
 terminos_sal_temp_rawdata = pd.read_csv(
     sal_temp_terminos_semar_model, sep=",", header=0, decimal=".", encoding="utf-8"
