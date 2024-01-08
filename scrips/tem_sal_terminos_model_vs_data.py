@@ -34,6 +34,8 @@ terminos_sal_temp_rawdata = pd.read_csv(
 
 for col in terminos_sal_temp_rawdata.columns:
     print(col)
+    
+    
 terminos_sal_temp = terminos_sal_temp_rawdata[
     [
         "Time_model",

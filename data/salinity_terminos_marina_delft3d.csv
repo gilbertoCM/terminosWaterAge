@@ -1,4 +1,4 @@
-Time_model,salinity_psu_model,temperature_C_model,Time _2016_data,Date_GMT_00,Conductivity_microsiemens_cm,Temp_C,Year_2016,Date_GMT_00,Conductivity_microsiemens_cm,Temp_C,Year_2017,Date_GMT_00,Conductivity_microsiemens_cm,Temp_C,Year_2018,Conductivity_microsiemens_cm_average,Conductivity_microsiemens_cm_std,Temp_C_average,Temp_C_std
+Time_model,Salinity_psu_model,Temperature_C_model,Time _2016_data,Date_GMT_00,Conductivity_microsiemens_cm,Temp_C,Year_2016,Date_GMT_00,Conductivity_microsiemens_cm,Temp_C,Year_2017,Date_GMT_00,Conductivity_microsiemens_cm,Temp_C,Year_2018,Conductivity_microsiemens_cm_average,Conductivity_microsiemens_cm_std,Temp_C_average,Temp_C_std
 01/01/2016 01:00,24.8903,25.9636,01/01/2016 00:00,,,,,,,,,01/01/2018 00:00,42142.2,26.75,2018,42142.2,nan,26.75,nan
 01/01/2016 01:30,24.8573,25.9191,01/01/2016 00:30,,,,,,,,,01/01/2018 00:30,42089.4,26.74,2018,42089.4,nan,26.74,nan
 01/01/2016 02:00,24.641,25.9164,01/01/2016 01:00,,,,,01/01/2017 00:00,35293.4,27.63,2017,01/01/2018 01:00,42188.4,26.74,2018,38740.9,4875.501256,27.185,0.629325035
