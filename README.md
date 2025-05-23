@@ -99,3 +99,6 @@ Salinity was computed in Python using the [TEOS-10 GSW toolbox](https://teos-10.
 [^3]: [Author profile - ICML UNAM](https://www.icmyl.unam.mx/el_carmen/quienes_somos/personal_academico/jose-gilberto-cardoso-mohedano)  
 [^4]: [Digital profile](https://blinq.me/YKZ9U8mqdr8n?bs=db)  
 [^5]: CONAGUA (2014). *National Data Bank of Surface Waters*. [Accessed 2018-10-01]. http://www.conagua.gob.mx/CONAGUA07/Contenido/Documentos/Portada%20BANDAS.htm  
+
+
+[![Licencia: CC BY-NC 4.0](https://licensebuttons.net/l/by-nc/4.0/88x31.png)](https://creativecommons.org/licenses/by-nc/4.0/)
