@@ -1,4 +1,4 @@
-## Python Scripts and Data Repository
+##  Code and Data for Water Age Analysis in Terminos Lagoon, Southeastern Coastal Mexico 
 
 The Python scripts were developed by José-Gilberto Cardoso-Mohedano ([ORCID](https://orcid.org/0000-0002-2918-972X)).
 
