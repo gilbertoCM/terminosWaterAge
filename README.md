@@ -24,7 +24,7 @@ José-Gilberto Cardoso-Mohedano<sup>a, *</sup>, Eduardo Gómez-de la Peña<sup>b
 Tel: +52-938-1120285 ext. 201  
 Email: [gcardoso@cmarl.unam.mx](mailto:gcardoso@cmarl.unam.mx)
 
-For more details on the methodology, please refer to: [DOI placeholder](https://doi.org/XXXXX)  
+For more details on the methodology, please refer to: [DOI submitted](https://doi.org/XXXXX)  
 To cite this repository: [![Falta DOI Zenodo](https://doi.org/XXXXX)](https://doi.org/XXXXX)
 
 ---
