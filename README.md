@@ -100,5 +100,5 @@ Salinity was computed in Python using the [TEOS-10 GSW toolbox](https://teos-10.
 [^4]: [Digital profile](https://blinq.me/YKZ9U8mqdr8n?bs=db)  
 [^5]: CONAGUA (2014). *National Data Bank of Surface Waters*. [Accessed 2018-10-01]. http://www.conagua.gob.mx/CONAGUA07/Contenido/Documentos/Portada%20BANDAS.htm  
 
-
+---
 [![Licencia: CC BY-NC 4.0](https://licensebuttons.net/l/by-nc/4.0/88x31.png)](https://creativecommons.org/licenses/by-nc/4.0/)
